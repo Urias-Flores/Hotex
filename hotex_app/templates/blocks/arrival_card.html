@@ -1,0 +1,13 @@
+<div class="arrival_card">
+    <h5 class="card__title">{{ arrival.guest.name }}</h5>
+
+    <p class="card__description">Room {{ arrival.room.number }}</p>
+    <p class="card__description">Check-out: {{ arrival.check_out }}</p>
+
+    <div class="card__preferences_container">
+        <p class="card__preferences_title">Preferences</p>
+        <p class="card__preferences">{{ arrival.guest.preference }}</p>
+    </div>
+
+    <span class="card__id">#{{ arrival.id|stringformat:"06d" }}</span>
+</div>
