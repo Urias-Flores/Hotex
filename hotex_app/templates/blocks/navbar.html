@@ -11,7 +11,7 @@
     </div>
 
     <ul class="navigation">
-        <li class="navigation__item{% if current_path == '/' or 'dashboard' in current_path %} navigation__item--active{% endif %}">
+        <li class="navigation__item{% if current_path == '/' or 'dashboard' in current_path or 'arrivals' in current_path or 'departures' in current_path %} navigation__item--active{% endif %}">
             <img src="{% static 'images/icons/home.svg' %}" alt="Dashboard" class="navigation__icon">
             <a class="navigation__link" href="{% url 'dashboard' %}">Dashboard</a>
         </li>

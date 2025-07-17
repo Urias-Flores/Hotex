@@ -13,7 +13,7 @@
             <h3 class="subtitle">Today's overview</h3>
 
             <article class="overview_content">
-                <div class="overview_card">
+                <div class="overview_card" onclick="location.href='{% url 'arrivals' %}'">
                     <h4 class="overview_card__title">Arrivals</h4>
                     <p class="overview_card__value">{{ arrivals }}</p>
                 </div>

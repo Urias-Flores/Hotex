@@ -26,6 +26,12 @@
     padding: 15px;
     margin-top: 10px;
     flex: 1;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.overview_card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .overview_card__title {
@@ -236,3 +242,65 @@
 /* ------------ room status ------------ */
 
 /* ------------ Dashboard ------------ */
+
+/* ------------ Arrivals ------------ */
+.input--search {
+    width: 320px;
+    margin-bottom: 20px;
+}
+
+/* ------------ arrivals card ------------ */
+.arrivals_content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 18px;
+}
+
+.arrival_card {
+    border: 1px solid var(--color-light-gray);
+    border-radius: 12px;
+    padding: 13px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.arrival_card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card__description {
+    font-size: 16px;
+    color: var(--color-gray);
+    margin-bottom: 5px;
+}
+
+.card__preferences_container {
+    background: var(--color-light-gray);
+    padding: 6px 10px;
+    border-radius: 12px;
+    gap: 5px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.card__preferences_title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-dark-gray);
+    margin-bottom: 5px;
+}
+
+.card__id {
+    display: block;
+    font-size: 14px;
+    color: var(--color-gray);
+    text-align: right;
+    margin-top: 15px;
+}
+/* ------------ arrivals card ------------ */

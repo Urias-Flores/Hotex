@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.urls import path
 from django.contrib.auth.decorators import login_required
@@ -87,6 +88,32 @@ def dashboard_page(request):
       }
     }))
 
+def arrivals_page(request):
+  search = request.GET.get('search', None)
+
+  reservations = Reservation.objects.filter(check_in=datetime.now())
+
+  if search:
+    reservations = reservations.filter(
+      Q(guest__name__icontains=search) |
+      Q(id__contains=search)
+    )
+
+  return (render(
+    request,
+    'arrivals.html',
+    {
+      'user': request.user,
+      'title': 'Arrivals',
+      'current_path': request.path,
+      'reservations': reservations,
+      'query_params': {
+        'search': search or ''
+      }
+    }
+  ))
+
 urlpatterns = [
   path('', dashboard_page, name='dashboard'),
+  path('arrivals/', arrivals_page, name='arrivals'),
 ]

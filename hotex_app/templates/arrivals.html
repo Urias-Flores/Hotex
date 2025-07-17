@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+        <h1 class="title">Arrivals</h1>
+        <h3 class="subtitle">Today's arrivals</h3>
+
+        <div class="input input--search">
+            <img src="{% static 'images/icons/search.svg' %}" alt="search" class="input__icon">
+            <input
+                type="text"
+                placeholder="Search by guest name or booking number"
+                class="input__field input__field--search"
+                id="search"
+                value="{{ query_params.search }}"
+            >
+        </div>
+
+        <div class="topbar">
+            <div class="topbar__actions">
+                <button class="button" type="button" onclick="window.location.href='{% url 'dashboard' %}'">
+                    <img src="{% static 'images/icons/arrow-left.svg' %}" alt="back" class="button__icon">
+                    <p class="button__text">back to dashboard</p>
+                </button>
+                <button class="button" type="button" onclick="">
+                    <p class="button__text">departures</p>
+                </button>
+            </div>
+        </div>
+
+        <article class="arrivals_content">
+            {% for reservation in reservations %}
+                {% include 'blocks/arrival_card.html' with arrival=reservation %}
+            {% endfor %}
+        </article>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/arrivals.js' %}"></script>
+{% endblock %}
