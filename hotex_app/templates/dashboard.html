@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{%  block styles %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="dashboard_content">
+        <section class="content-wrapper">
+            <h1 class="title">{{title}}</h1>
+            <h3 class="subtitle">Today's overview</h3>
+
+            <article class="overview_content">
+                <div class="overview_card">
+                    <h4 class="overview_card__title">Arrivals</h4>
+                    <p class="overview_card__value">{{ arrivals }}</p>
+                </div>
+
+                <div class="overview_card">
+                    <h4 class="overview_card__title">Departures</h4>
+                    <p class="overview_card__value">{{ departures }}</p>
+                </div>
+            </article>
+
+            <h3 class="subtitle">Quick actions</h3>
+
+            <article class="quick_actions_content">
+                {% include 'blocks/action_card.html' with title="Book a room" description="Quickly create a new reservation for a guest" image="images/room.jpg" actions_name="New book" action="add-reservation" %}
+                {% include 'blocks/action_card.html' with title="Add a guest" description="ASAP create a new guest" image="images/reception.jpg" actions_name="New guest" action="add-guest" %}
+            </article>
+
+            <h3 class="subtitle">Room availability</h3>
+
+            <article class="room_availability">
+                <label for="room" class="room_availability__label">Room</label>
+                <select name="room" id="room" class="room_availability__select" onchange="window.location.href='{% url 'dashboard' %}?room=' + this.value + '&month={{ query_data.month }}&year={{ query_data.year }}'">
+                    {% for room in rooms %}
+                        <option
+                            value="{{ room.id }}"
+                            {% if query_data.room == room.id %}selected{% endif %}
+                        >
+                            Room {{ room.number }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <div class="calendar_container">
+                    {% include 'blocks/availability_calendar.html' %}
+                </div>
+            </article>
+        </section>
+
+        <aside class="control_bar">
+            <h3 class="subtitle">Room status (Tonight)</h3>
+
+            <div class="room_status_container">
+                <div class="room_status_list">
+                    {% for room in rooms %}
+                        {% include 'blocks/room_status.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </aside>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

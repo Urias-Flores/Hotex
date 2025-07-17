@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+        <h1 class="title">Maintenances</h1>
+        <h3 class="subtitle">Manage all maintenances and their status</h3>
+
+        <div class="topbar">
+            <div class="topbar__actions">
+                <button class="button" onclick="window.location.href='{% url 'add-maintenance' %}'">
+                    <img src="{% static 'images/icons/plus.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">add maintenance</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'rooms' %}'">
+                    <img src="{% static 'images/icons/storage.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">rooms</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'buildings' %}'">
+                    <img src="{% static 'images/icons/building.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">buildings</p>
+                </button>
+            </div>
+        </div>
+
+        {% include "blocks/messages.html" %}
+
+        <div class="table_container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="table__header">Mtc. id</th>
+                        <th class="table__header">Description</th>
+                        <th class="table__header">Room</th>
+                        <th class="table__header">Start date</th>
+                        <th class="table__header">End date</th>
+                        <th class="table__header">Status</th>
+                        <th class="table__header">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for maintenance in maintenances %}
+                        <tr class="body__row">
+                            <td class="body__cell">{{ maintenance.id|stringformat:"06d" }}</td>
+                            <td class="body__cell body__cell--max">{{ maintenance.description }}</td>
+                            <td class="body__cell">{{ maintenance.room.number }}</td>
+                            <td class="body__cell">{{ maintenance.start_date }}</td>
+                            <td class="body__cell">{{ maintenance.end_date }}</td>
+                            <td class="body__cell">{{ maintenance.status|lower|capfirst }}</td>
+                            <td class="body__cell table__actions">
+                                {% if maintenance.status != 'COMPLETED' %}
+                                    <button class="button" type="button" onclick="window.location.href='{% url 'delete-maintenance' maintenance.id %}'">
+                                        Delete
+                                    </button>
+                                {% endif %}
+
+                                {% if maintenance.status == 'PENDING' %}
+                                    <button class="button" type="button" onclick="window.location.href='{% url 'update-maintenance' maintenance.id %}'">
+                                        Start
+                                    </button>
+                                {% elif maintenance.status == 'IN_PROGRESS' %}
+                                    <button class="button" type="button" onclick="window.location.href='{% url 'update-maintenance' maintenance.id %}'">
+                                        Finish
+                                    </button>
+                                {% endif %}
+
+                                {%if maintenance.status == 'COMPLETED' %}
+                                    <button class="button" type="button" style="opacity: 0; width: fit-content;">
+                                        FINISHED
+                                    </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

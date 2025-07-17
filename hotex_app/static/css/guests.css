@@ -1,0 +1,23 @@
+.guests_container {
+    padding: 30px;
+    flex: 1;
+    width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar__actions {
+    margin-top: 20px;
+}
+
+.add_guest_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 30px;
+}
+
+.form .button {
+    margin-top: 15px;
+}

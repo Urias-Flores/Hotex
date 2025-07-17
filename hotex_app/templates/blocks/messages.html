@@ -1,0 +1,5 @@
+{% if messages %}
+    {% for message in messages %}
+        {% include 'blocks/validator_message.html' with message=message only %}
+    {% endfor %}
+{% endif %}

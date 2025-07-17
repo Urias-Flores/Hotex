@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/reservations.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="reservations_content">
+        <h1 class="title">{{title}}</h1>
+        <h3 class="subtitle">Manage all upcoming and past reservations</h3>
+
+        <div class="input">
+            <img src="{% static 'images/icons/search.svg' %}" alt="search" class="input__icon">
+            <input
+                type="text"
+                placeholder="Search reservations by guest name or booking number"
+                class="input__field input__field--search"
+                id="search"
+                value="{{ query_params.search }}"
+            >
+        </div>
+
+        <p class="filters_title">Search by date or room type</p>
+        <div class="topbar">
+            <div class="topbar__filters">
+                <div class="input">
+                    <input type="date" class="input__field input__field" id="date" value="{{ query_params.date }}">
+                </div>
+
+                <div class="input">
+                    <select name="room" id="room" class="input__field">
+                        <option value="0">All rooms</option>
+                        {% for room in rooms %}
+                            <option value="{{ room.id }}" {% if query_params.room == room.id %}selected{% endif %}>Room{{ room.number }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="topbar__actions">
+                <button class="button" onclick="window.location.href='{% url 'add-reservation' %}'">
+                    <img src="{% static 'images/icons/plus.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">new book</p>
+                </button>
+            </div>
+        </div>
+
+        {% include "blocks/messages.html" %}
+
+        <div class="table_container">
+            <table class="table">
+                <thead class="reservations__headers">
+                    <tr>
+                        <th class="table__header">Booking number</th>
+                        <th class="table__header">Guest name</th>
+                        <th class="table__header">Room</th>
+                        <th class="table__header">Check-in date</th>
+                        <th class="table__header">Check-out date</th>
+                        <th class="table__header">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="reservations__body">
+                    {% for reservation in reservations %}
+                        <tr class="body__row">
+                            <td class="body__cell">{{ reservation.id|stringformat:"06d" }}</td>
+                            <td class="body__cell">{{ reservation.guest.name }}</td>
+                            <td class="body__cell">Room {{ reservation.room.number }}</td>
+                            <td class="body__cell">{{ reservation.check_in }}</td>
+                            <td class="body__cell">{{ reservation.check_out }}</td>
+                            <td class="body__cell">
+                                <button class="button" type="button" onclick="window.location.href='{% url 'cancel-reservation' reservation.id %}'">
+                                    Cancel
+                                </button>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="table__empty_message">No reservations found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/reservations.js' %}"></script>
+{% endblock %}

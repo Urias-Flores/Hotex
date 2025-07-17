@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="add_room_content">
+    {% include 'blocks/back_button.html' %}
+        <div class="form_wrapper">
+            <h1 class="title">
+                {% if room %}Edit{% else %}Add a{% endif %} room
+            </h1>
+            <p class="subtitle">
+                Fill all the fields to {% if room %}edit the{% else %}add a new{% endif %} room
+            </p>
+            <form method="post" class="form" action="{% if room %}{% url 'update-room' room.id %}{% else %}{% url 'save-room' %}{% endif %}">
+                {% csrf_token %}
+
+                {% if room %}
+                    {{ form.id }}
+                {% endif %}
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="room_number">Room number</label>
+                        <div class="input">
+                            {{ form.number }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="room_number">Type</label>
+                        <div class="input">
+                            {{ form.type }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="room_number">Building</label>
+                        <div class="input">
+                            {{ form.building }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="room_number">Floor</label>
+                        <div class="input">
+                            {{ form.floor }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="room_number">Beds</label>
+                        <div class="input">
+                            {{ form.beds }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="room_number">Persons</label>
+                        <div class="input">
+                            {{ form.persons }}
+                        </div>
+                    </div>
+                </div>
+
+                {% include 'blocks/form_errors.html' with form=form only %}
+
+                <button type="submit" class="button">
+                    {% if room %}Update room{% else %}Add room{% endif %}
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

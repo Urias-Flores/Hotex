@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="rooms_content">
+        <h1 class="title">Rooms</h1>
+        <h3 class="subtitle">Manage all rooms and their status</h3>
+
+        <div class="topbar">
+            <div class="topbar__actions">
+                <button class="button" onclick="window.location.href='{% url 'add-room' %}'">
+                    <img src="{% static 'images/icons/plus.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">add room</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'maintenances' %}'">
+                    <img src="{% static 'images/icons/maintenance.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">schedule maintenances</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'buildings' %}'">
+                    <img src="{% static 'images/icons/building.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">buildings</p>
+                </button>
+            </div>
+        </div>
+
+        {% include "blocks/messages.html" %}
+
+        <div class="table_container">
+            <table class="table">
+                <thead class="table__headers">
+                    <tr>
+                        <th class="table__header">Room</th>
+                        <th class="table__header">Type</th>
+                        <th class="table__header">Building</th>
+                        <th class="table__header">Floor</th>
+                        <th class="table__header">Capacity </th>
+                        <th class="table__header">Beds</th>
+                        <th class="table__header">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table__body">
+                    {% for room in rooms %}
+                        <tr class="body__row">
+                            <td class="body__cell">Room {{ room.number }}</td>
+                            <td class="body__cell">{{ room.type|lower|capfirst }}</td>
+                            <td class="body__cell">{{ room.building.name }}</td>
+                            <td class="body__cell">{{ room.floor }}</td>
+                            <td class="body__cell">{{ room.persons }}</td>
+                            <td class="body__cell">{{ room.beds }}</td>
+                            <td class="body__cell table__actions">
+                                <button class="button" type="button" onclick="window.location.href='{% url 'edit-room' room.id %}'">
+                                    Edit
+                                </button>
+
+                                <button class="button" type="button" onclick="window.location.href='{% url 'delete-room' room.id %}'">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="table__empty_message">No rooms found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

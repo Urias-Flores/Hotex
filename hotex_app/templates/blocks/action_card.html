@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="action_card">
+    <div class="action_card__content">
+        <h5 class="action_card__title">{{ title }}</h5>
+        <p class="action_card__description">{{ description }}</p>
+        <button type="button" class="action_card__button" onclick="window.location.href='{% url action %}'">{{ actions_name }}</button>
+    </div>
+
+    <img src="{% static image  %}" alt="related_image" class="action_card__image">
+</div>

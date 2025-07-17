@@ -1,0 +1,51 @@
+{% load static %}
+<div class="calendar_box">
+    <div class="calendar_header">
+        <button class="calendar_nav_arrow prev-month" id="prev-month" onclick="window.location.href='{% url 'dashboard' %}?room={{ query_data.room }}&month={{ previous_month }}&year={{ previous_year }}'">
+            <img src="{% static 'images/icons/chevron-left.svg' %}" alt="chevron-left" class="calendar_nav_arrow__image">
+        </button>
+        <h3 class="calendar_month_year">{{ month_name }} {{ year }}</h3>
+        <button class="calendar_nav_arrow next-month" id="next-month" onclick="window.location.href='{% url 'dashboard' %}?room={{ query_data.room }}&month={{ next_month }}&year={{ next_year }}'">
+            <img src="{% static 'images/icons/chevron-right.svg' %}" alt="chevron-right" class="calendar_nav_arrow__image">
+        </button>
+    </div>
+
+    <div class="calendar_weekdays">
+        <span>Su</span>
+        <span>Mo</span>
+        <span>Tu</span>
+        <span>We</span>
+        <span>Th</span>
+        <span>Fr</span>
+        <span>Sa</span>
+    </div>
+
+    <div class="calendar_days_grid">
+        {% for week in calendar_days %}
+            {% for day in week %}
+                {% if day == 0 %}
+                    <div class="calendar_day-empty"></div>
+                {% else %}
+                    <div class="calendar_day
+                        {% for reservation in reservations %}
+                            {% for booked_day in reservation %}
+                                {% if day == booked_day and forloop.first %}
+                                    calendar_day--booked-first
+                                {% elif day == booked_day and forloop.last %}
+                                    calendar_day--booked-last
+                                {% elif day == booked_day %}
+                                    calendar_day--booked
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if day == current_day and current_month == month and current_year == year %}calendar_day--today{% endif %}"
+                        data-day="{{ day }}"
+                        data-month="{{ month }}"
+                        data-year="{{ year }}">
+                        {{ day }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/guests.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="add_guest_content">
+        {% include 'blocks/back_button.html' %}
+        <div class="form_wrapper">
+            <h1 class="title">
+                {% if guest %}
+                    Edit guest
+                {% else %}
+                    Add a guest
+                {% endif %}
+            </h1>
+            <p class="subtitle">
+                Fill out the form to {% if guest %}edit the{% else %}add a new{% endif %} guest
+            </p>
+            <form
+                method="POST"
+                class="form"
+                action="
+                    {% if guest %}{% url 'update-guest' guest.id %}
+                    {% else %}{% url 'save-guest' %}
+                    {% endif %}"
+            >
+                {% csrf_token %}
+
+                {% if guest %}
+                    {{ form.id }}
+                {% endif %}
+
+                <div class="form__input">
+                    <label for="guest_name">Guest name</label>
+                    <div class="input">
+                        {{ form.name }}
+                    </div>
+                </div>
+
+                <div class="form__input">
+                    <label for="guest_email">Email</label>
+                    <div class="input">
+                        {{ form.email }}
+                    </div>
+                </div>
+
+                <div class="form__input">
+                    <label for="guest_phone">Phone</label>
+                    <div class="input">
+                        {{ form.phone }}
+                    </div>
+                </div>
+
+                <div class="form__input">
+                    <label for="guest_address">Preferences</label>
+                    <div class="input input--textarea">
+                        {{ form.preferences }}
+                    </div>
+                </div>
+
+                {% include 'blocks/form_errors.html' with form=form only %}
+
+                <button type="submit" class="button">
+                    {% if guest %}Update guest{% else %}Add guest{% endif %}
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

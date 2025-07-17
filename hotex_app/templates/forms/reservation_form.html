@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{%  load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/reservations.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+    {% include 'blocks/back_button.html' %}
+        <div class="form_wrapper">
+            <h1 class="title">Book a room</h1>
+            <p class="subtitle">Fill out the form to book a room</p>
+            <form method="post" class="form" action="{% url 'save-reservation' %}">
+                {% csrf_token %}
+
+                <div class="form__input">
+                    <label for="guest_select">Select a guest</label>
+                    <div class="input">
+                        {{ form.guest }}
+                    </div>
+                </div>
+
+                <div class="form__input">
+                    <label for="guest_room">Select a room</label>
+                    <div class="input">
+                        {{ form.room }}
+                    </div>
+                </div>
+
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="check_in_date" class="input__label">Check-in date</label>
+                        <div class="input">
+                            {{ form.check_in }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="check_out_date" class="input__label">Check-out date</label>
+                        <div class="input">
+                            {{ form.check_out }}
+                        </div>
+                    </div>
+                </div>
+
+                {% include 'blocks/form_errors.html' with form=form only %}
+
+                <button type="submit" class="button">Save</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

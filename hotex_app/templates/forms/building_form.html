@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+        {% include 'blocks/back_button.html' %}
+        <div class="form_wrapper">
+            <h1 class="title">Add a building</h1>
+            <h3 class="subtitle">Fill the form to add a new building</h3>
+            <form method="POST" class="form" action="{% if room %}{% url 'update-building' room.id %}{% else %}{% url 'save-building' %}{% endif %}">
+                {% csrf_token %}
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="building_name">Building name</label>
+                        <div class="input">
+                            {{ form.name }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="building_address">Number of floors</label>
+                        <div class="input">
+                            {{ form.floors_number }}
+                        </div>
+                    </div>
+                </div>
+
+                {% include 'blocks/form_errors.html' with form=form only %}
+
+                <button type="submit" class="button">Save</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

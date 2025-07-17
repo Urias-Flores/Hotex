@@ -1,0 +1,40 @@
+{% load static %}
+<aside class="nav_bar">
+    <img src="{% static 'images/logo.png' %}" alt="logo" class="nav_bar__logo">
+
+    <div class="user_container">
+        <img class="user_container__avatar" src="{% static 'images/profile_image.jpg' %}" alt="profile_photo">
+        <div class="user_container__info">
+            <h3 class="user_container__name">{{ user.first_name }} {{ user.last_name }}</h3>
+            <p class="user_container__position">{{ user.email }}</p>
+        </div>
+    </div>
+
+    <ul class="navigation">
+        <li class="navigation__item{% if current_path == '/' or 'dashboard' in current_path %} navigation__item--active{% endif %}">
+            <img src="{% static 'images/icons/home.svg' %}" alt="Dashboard" class="navigation__icon">
+            <a class="navigation__link" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        <li class="navigation__item{% if 'reservations' in current_path %} navigation__item--active{% endif %}">
+            <img src="{% static 'images/icons/calendar.svg' %}" alt="Reservations" class="navigation__icon">
+            <a href="{% url 'reservations' %}">Reservations</a>
+        </li>
+        <li class="navigation__item{% if 'guests' in current_path %} navigation__item--active{% endif %}">
+            <img src="{% static 'images/icons/users.svg' %}" alt="Guests" class="navigation__icon">
+            <a href="{% url 'guests' %}">Guests</a>
+        </li>
+        <li class="navigation__item{% if 'rooms' in current_path %} navigation__item--active{% endif %}">
+            <img src="{% static 'images/icons/storage.svg' %}" alt="Rooms" class="navigation__icon">
+            <a href="{% url 'rooms' %}">Rooms</a>
+        </li>
+{#        <li class="navigation__item{% if 'settings' in current_path %} navigation__item--active{% endif %}">#}
+{#            <img src="{% static 'images/icons/cog.svg' %}" alt="Settings" class="navigation__icon">#}
+{#            <a href="{% url 'settings' %}">Settings</a>#}
+{#        </li>#}
+    </ul>
+
+    <button class="button" type="button" onclick="window.location.href='{% url 'logout' %}'">
+        <img src="{% static 'images/icons/arrow-uturn-left.svg' %}" alt="Logout" class="button__icon">
+        <p class="button__text">logout</p>
+    </button>
+</aside>

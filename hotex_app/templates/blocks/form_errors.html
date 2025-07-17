@@ -1,0 +1,17 @@
+{% if form.errors %}
+    {% for error in form.non_field_errors %}
+        <div class="validator_message validator_message--error">
+            <div class="validator_message__line"></div>
+            <p class="validator_message__text">{{ error }}</p>
+        </div>
+    {% endfor %}
+
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="validator_message validator_message--error">
+                <div class="validator_message__line"></div>
+                <p class="validator_message__text">{{ error }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

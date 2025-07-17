@@ -1,0 +1,20 @@
+{% load static %}
+
+<div
+    class="building_card{% if building.id == query_params.building %} building_card--selected{% endif %}"
+    onclick="window.location.href='{% url 'buildings' %}{% if query_params.building and building.id == query_params.building %}{% else %}?building={{ building.id }}{% endif %}'"
+>
+    <img src="{% static 'images/icons/building_2.svg' %}" alt="building" class="building_card__icon">
+    <div class="building_card__content">
+        <h5 class="building_card__title">{{ building.name }}</h5>
+        <p class="building_card__info">
+            <span class="info__label">Floors:</span>
+            <span class="info__value">{{ building.floors_number }}</span>
+        </p>
+
+        <p class="building_card__info">
+            <span class="info__label">Rooms:</span>
+            <span class="info__value">{{ building.rooms_count }}</span>
+        </p>
+    </div>
+</div>

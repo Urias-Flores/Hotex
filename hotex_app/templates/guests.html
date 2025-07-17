@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/guests.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <main class="guests_container">
+        <h1  class="title">{{title}}</h1>
+
+        <div class="input">
+            <img src="{% static 'images/icons/search.svg' %}" alt="search" class="input__icon">
+            <input type="text" placeholder="Search guest" class="input__field input__field--search" id="search" value="{{ query_params.search }}">
+        </div>
+
+        <div class="topbar">
+            <div class="topbar__actions">
+                <button class="button" onclick="window.location.href='{% url 'add-guest' %}'">
+                    <img src="{% static 'images/icons/plus.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">new guest</p>
+                </button>
+            </div>
+        </div>
+
+        {% include "blocks/messages.html" %}
+
+        <div class="table_container">
+            <table class="table">
+                <thead class="table__headers">
+                    <tr>
+                        <th class="table__header">Name</th>
+                        <th class="table__header">Email</th>
+                        <th class="table__header">Phone </th>
+                        <th class="table__header">Preferences</th>
+                        <th class="table__header">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table__body">
+                    {% for guest in guests %}
+                        <tr class="body__row">
+                            <td class="body__cell">{{ guest.name }}</td>
+                            <td class="body__cell">{{ guest.email }}</td>
+                            <td class="body__cell">{{ guest.phone }}</td>
+                            <td class="body__cell">{{ guest.preference }}</td>
+                            <td class="body__cell table__actions">
+                                <button class="button" type="button" onclick="window.location.href='{% url 'edit-guest' guest.id %}'">
+                                    Edit
+                                </button>
+
+                                <button class="button" type="button" onclick="window.location.href='{% url 'delete-guest' guest.id %}'">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="table__empty_message">No guests found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+{% endblock %}
+
+{%  block scripts %}
+    <script src="{% static 'js/guests.js' %}"></script>
+{% endblock %}

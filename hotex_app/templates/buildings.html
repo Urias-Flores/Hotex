@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+        <h1 class="title">Buildings</h1>
+        <h2 class="subtitle">Manage all buildings</h2>
+
+        <div class="topbar">
+            <div class="topbar__actions">
+                <button class="button" onclick="window.location.href='{% url 'add-building' %}'">
+                    <img src="{% static 'images/icons/plus.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">add building</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'delete-building' query_params.building %}'">
+                    <img src="{% static 'images/icons/trash.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">delete building</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'rooms' %}'">
+                    <img src="{% static 'images/icons/storage.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">rooms</p>
+                </button>
+
+                <button class="button" onclick="window.location.href='{% url 'maintenances' %}'">
+                    <img src="{% static 'images/icons/maintenance.svg' %}" alt="filter" class="button__icon">
+                    <p class="button__text">maintenances</p>
+                </button>
+            </div>
+        </div>
+
+        {% include "blocks/messages.html" %}
+
+        <div class="buildings_container">
+            {% for building in buildings %}
+                {% include "blocks/building_card.html" with building=building query_params=query_params only%}
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

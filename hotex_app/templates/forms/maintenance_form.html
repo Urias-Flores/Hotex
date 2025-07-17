@@ -1,0 +1,55 @@
+{%  extends 'layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main_content">
+        {% include 'blocks/back_button.html' %}
+        <div class="form_wrapper">
+            <h1 class="title">Add a maintenance</h1>
+            <h3 class="subtitle">Fill the form to add a new maintenance</h3>
+            <form method="POST" class="form" action="{% url 'save-maintenance' %}">
+                {% csrf_token %}
+                <div class="form__input">
+                    <label for="maintenance_description">Maintenance description</label>
+                    <div class="input input--textarea">
+                        {{ form.description }}
+                    </div>
+                </div>
+
+                <div class="form__input">
+                    <label for="room">Room</label>
+                    <div class="input">
+                        {{ form.room }}
+                    </div>
+                </div>
+
+                <div class="form__inputs_row">
+                    <div class="form__input">
+                        <label for="start_date">Start date</label>
+                        <div class="input">
+                            {{ form.start_date }}
+                        </div>
+                    </div>
+
+                    <div class="form__input">
+                        <label for="end_date">End date</label>
+                        <div class="input">
+                            {{ form.end_date }}
+                        </div>
+                    </div>
+                </div>
+
+                {% include 'blocks/form_errors.html' with form=form only %}
+
+                <button class="button" type="submit">
+                    <p class="button__text">save maintenance</p>
+                </button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

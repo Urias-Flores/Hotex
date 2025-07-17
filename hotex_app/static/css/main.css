@@ -1,0 +1,368 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: black;
+}
+
+:root{
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    --main-color: #f0f0f0;
+    --color-gray: #949494;
+    --color-light-gray: rgb(242, 242, 244);
+    --color-dark-gray: rgb(100, 100, 100);
+    --color-light-blue: rgb(240, 240, 255);
+    --color-dark-blue: rgb(100, 100, 255);
+    --color-light-red: rgb(255, 240, 240);
+    --color-dark-red: rgb(255, 100, 100);
+    --color-light-green: rgb(240, 255, 240);
+    --color-dark-green: rgb(58, 133, 58);
+    --color-green: rgb(58, 133, 58);
+    --color-light-yellow: rgb(255, 245, 240);
+    --color-dark-yellow: rgb(255, 170, 100);
+}
+
+body {
+    display: flex;
+    overflow: hidden;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', serif;
+}
+
+textarea {
+    resize: none;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+main {
+    overflow: auto;
+}
+
+.nav_bar {
+    width: 290px;
+    height: 100vh;
+    padding: 20px 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user_container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user_container__avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.user_container__position {
+    font-size: 15px;
+    color: var(--color-gray);
+}
+
+.nav_bar__logo {
+    width: 100px;
+    height: auto;
+    margin: 20px auto 20px 0;
+}
+
+.navigation {
+    margin-top: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.navigation__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 999px;
+}
+
+.navigation__item--active {
+    background-color: var(--color-light-gray);
+}
+
+.navigation__icon {
+    width: 20px;
+    height: 20px;
+}
+
+.main_content {
+    padding: 30px;
+    flex: 1;
+    width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main_content--login {
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-weight: 600;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-dark-gray);
+    margin-bottom: 10px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background-color: var(--color-light-gray);
+    width: fit-content;
+}
+
+.input__icon {
+    width: 20px;
+    height: 20px;
+}
+
+.input__field {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+    font-size: 16px;
+    font-weight: 500;
+    width: fit-content;
+    padding: 4px 15px;
+    border-radius: 999px;
+}
+
+.button__icon {
+    width: 20px;
+    height: 20px;
+}
+
+.table_container {
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--color-light-gray);
+    padding: 10px;
+    border-radius: 12px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.table {
+    width: 100%;
+}
+
+.table__empty_message {
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    background-color: var(--color-light-gray);
+    border-radius: 8px;
+    color: var(--color-dark-gray);
+    margin-top: 20px;
+}
+
+.table__header {
+    color: var(--color-dark-gray);
+    text-align: left;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-light-gray);
+}
+
+.body__cell {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.body__cell--max {
+    width: 30%;
+}
+
+.table__actions {
+    display: flex;
+    gap: 10px;
+    width: min-content;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.topbar__filters, .topbar__actions {
+    display: flex;
+    gap: 20px;
+}
+
+.form_wrapper {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.form_wrapper__logo {
+    width: 340px;
+    height: auto;
+}
+
+.form_wrapper--login {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 70%;
+    margin-bottom: 70px;
+}
+
+.login_content {
+    flex: 1;
+}
+
+.form_wrapper .title {
+    margin: 80px 0 10px;
+}
+
+.login_content .title {
+    margin-top: 0;
+}
+
+.form {
+    background-color: white;
+    border-radius: 12px;
+    margin: 20px auto 0;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form--login {
+    margin-bottom: 40px;
+}
+
+.form .button {
+    margin-top: 15px;
+}
+
+.form__input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.form__inputs_row {
+    display: flex;
+    gap: 20px;
+}
+
+.form__inputs_row .form__input {
+    flex: 1;
+}
+
+.form__input .input, .input .input__field {
+    width: 100%;
+}
+
+.form__input .form__input--textarea {
+    border-radius: 12px;
+}
+
+.input--textarea {
+    border-radius: 12px;
+}
+
+.input__field--textarea {
+    resize: none;
+    height: 80px;
+}
+
+.validator_message {
+    background-color: var(--color-light-red);
+    font-size: 12px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+}
+
+.validator_message--error {
+    background-color: var(--color-light-red);
+}
+
+.validator_message--success {
+    background-color: var(--color-light-green);
+}
+
+.validator_message--warning {
+    background-color: var(--color-light-yellow);
+}
+
+.validator_message__line {
+    width: 5px;
+    height: 30px;
+}
+
+.validator_message__text {
+    font-size: 15px;
+}
+
+.validator_message--error .validator_message__line {
+    background-color: var(--color-dark-red);
+}
+
+.validator_message--error .validator_message__text {
+    color: var(--color-dark-red);
+}
+
+.validator_message--warning .validator_message__line {
+    background-color: var(--color-dark-yellow);
+}
+
+.validator_message--warning .validator_message__text {
+    color: var(--color-dark-yellow);
+}
+
+.validator_message--success .validator_message__line {
+    background-color: var(--color-dark-green);
+}
+
+.validator_message--success .validator_message__text {
+    color: var(--color-dark-green);
+}

@@ -1,0 +1,17 @@
+<div class="room_status">
+    <div class="room_status__content">
+        <h4 class="room_status__title">Room {{ room.number }}</h4>
+        <p class="room_status__description">{{ room.status }}</p>
+        <p class="room_status__description">
+            {{ room.building.name }}, floor {{ room.floor }}, beds {{ room.beds }}, persons {{ room.persons }}
+        </p>
+    </div>
+
+    <div class="availability_container">
+        <div class="availability__point
+            {%  if room.is_available %}availability__point--available
+            {% else  %}availability__point--not_available
+            {% endif %}"
+        ></div>
+    </div>
+</div>
