@@ -66,14 +66,6 @@ Hotex is a hotel management system built with Django. It provides a web-based in
 - `manage.py` – Django management script
 - `db.sqlite3` – SQLite database (default)
 
-## Contribution
-
-Contributions are welcome! To contribute:
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
-
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
