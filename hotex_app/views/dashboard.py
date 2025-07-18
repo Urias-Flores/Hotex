@@ -113,7 +113,32 @@ def arrivals_page(request):
     }
   ))
 
+def departures_page(request):
+  departures = Reservation.objects.filter(check_out=datetime.now())
+  search = request.GET.get('search', None)
+
+  if search:
+    departures = departures.filter(
+      Q(guest__name__icontains=search) |
+      Q(id__contains=search)
+    )
+
+  return (render(
+    request,
+    'departures.html',
+    {
+      'user': request.user,
+      'title': 'Departures',
+      'current_path': request.path,
+      'departures': departures,
+      'query_params': {
+        'search': search or ''
+      }
+    }
+  ))
+
 urlpatterns = [
   path('', dashboard_page, name='dashboard'),
   path('arrivals/', arrivals_page, name='arrivals'),
+  path('departures/', departures_page, name='departures'),
 ]
