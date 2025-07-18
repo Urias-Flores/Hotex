@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
-{% block content %}
+{%  block content %}
     <main class="main_content">
-        <h1 class="title">Arrivals</h1>
-        <h3 class="subtitle">Today's arrivals</h3>
+        <h1 class="title">Departures</h1>
+        <h3 class="subtitle">Waiting to leave the hotel</h3>
 
         <div class="input input--search">
             <img src="{% static 'images/icons/search.svg' %}" alt="search" class="input__icon">
@@ -28,20 +28,20 @@
                     <img src="{% static 'images/icons/arrow-left.svg' %}" alt="back" class="button__icon">
                     <p class="button__text">back to dashboard</p>
                 </button>
-                <button class="button" type="button" onclick="window.location.href='{% url 'departures' %}'">
-                    <p class="button__text">departures</p>
+                <button class="button" type="button" onclick="window.location.href='{% url 'arrivals' %}'">
+                    <p class="button__text">arrivals</p>
                 </button>
             </div>
         </div>
 
-        <article class="arrivals_content">
-            {% for reservation in reservations %}
-                {% include 'blocks/arrival_card.html' with arrival=reservation %}
+        <article class="departures_content">
+            {% for departure in departures %}
+                {% include "blocks/departure_card.html" %}
             {% endfor %}
         </article>
     </main>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'js/arrivals.js' %}"></script>
+    <script src="{% static 'js/departures.js' %}"></script>
 {% endblock %}
